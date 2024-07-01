@@ -1,26 +1,15 @@
 import React from 'react';
-import {PaperProvider, Text} from 'react-native-paper';
-import {SafeAreaView, StatusBar, StyleSheet, View} from 'react-native';
+import {PaperProvider} from 'react-native-paper';
 import {theme} from './src/constants';
+import {NavigationContainer} from '@react-navigation/native';
+import {RootStackNavigator} from './src/navigators';
 
 export default function App() {
   return (
     <PaperProvider theme={theme}>
-      <SafeAreaView style={styles.root}>
-        <StatusBar barStyle={'dark-content'} backgroundColor={'red'} />
-        <View style={styles.wrapper}>
-          <Text>Hello World</Text>
-        </View>
-      </SafeAreaView>
+      <NavigationContainer>
+        <RootStackNavigator />
+      </NavigationContainer>
     </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-  wrapper: {
-    padding: 16,
-  },
-});
