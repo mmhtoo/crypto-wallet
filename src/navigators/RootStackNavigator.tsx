@@ -1,7 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackScreenList} from '../types/react-navigation/declarations';
-import {ResetPasswordScreen, SignInScreen, SignUpScreen} from '../screens';
+import {ResetPasswordScreen, SignInScreen, SignUpScreen} from 'screens';
 
 const Stack = createNativeStackNavigator<RootStackScreenList>();
 
