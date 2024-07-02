@@ -3,8 +3,9 @@ import React from 'react';
 import {GetStartIcon} from 'assets/icons';
 import {color, fontFamily, SIZE} from 'styles';
 import {Button} from 'components';
+import {RootStackScreenProps} from 'types/react-navigation/declarations';
 
-const GetStartScreen = () => {
+const GetStartScreen = ({navigation}: RootStackScreenProps<'GetStart'>) => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.iconContainer}>
@@ -19,7 +20,7 @@ const GetStartScreen = () => {
           <Button
             title="Get Started"
             onPress={() => {
-              console.log('Hi');
+              navigation.navigate('Preview');
             }}
           />
         </View>

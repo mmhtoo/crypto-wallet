@@ -8,3 +8,4 @@
  *    \modals
  */
 export {default as Button} from './buttons/Button';
+export {default as AuthLayout} from './layouts/auth-layout/AuthLayout';
