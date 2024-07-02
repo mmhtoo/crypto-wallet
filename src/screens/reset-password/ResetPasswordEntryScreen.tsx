@@ -1,13 +1,13 @@
 import React from 'react';
 import {Button, Text} from 'react-native-paper';
-import {ControlledInput, SafeAreaLayout} from '../../components';
+import {ControlledInput, SafeAreaLayout} from 'components';
 import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
 import {FormProvider, useForm} from 'react-hook-form';
-import {RootStackScreenProps} from '../../types/react-navigation/declarations';
+import {PublicStackScreenProps} from 'types/react-navigation/declarations';
 
 export default function ResetPasswordEntryScreen({
   navigation,
-}: RootStackScreenProps<'ResetPasswordEntry'>) {
+}: PublicStackScreenProps<'ResetPasswordEntry'>) {
   const form = useForm();
 
   return (

@@ -2,17 +2,19 @@ import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {ControlledInput, HeaderLayout} from '../../components';
-import {RootStackScreenProps} from '../../types/react-navigation/declarations';
+import {PublicStackScreenProps} from '../../types/react-navigation/declarations';
 import {FormProvider, useForm} from 'react-hook-form';
 
 export default function ResetPasswordScreen({
   route,
-}: RootStackScreenProps<'ResetPassword'>) {
+}: PublicStackScreenProps<'ResetPassword'>) {
   const {email} = route.params;
   const form = useForm();
   return (
     <HeaderLayout>
-      <ScrollView style={styles.root}>
+      <ScrollView
+        style={styles.root}
+        contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
           <Text variant={'titleLarge'} style={styles.title}>
             Verify reset password
@@ -69,4 +71,7 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {marginTop: 16, rowGap: 16},
+  scrollContent: {
+    paddingBottom: 64,
+  },
 });
