@@ -10,3 +10,4 @@
 
 export {default as SafeAreaLayout} from './layouts/SafeAreaLayout';
 export {default as ControlledInput} from './inputs/ControlledInput';
+export {default as HeaderLayout} from './layouts/HeaderLayout';

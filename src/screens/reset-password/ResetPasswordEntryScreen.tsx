@@ -3,8 +3,11 @@ import {Button, Text} from 'react-native-paper';
 import {ControlledInput, SafeAreaLayout} from '../../components';
 import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
 import {FormProvider, useForm} from 'react-hook-form';
+import {RootStackScreenProps} from '../../types/react-navigation/declarations';
 
-export default function ResetPasswordEntryScreen() {
+export default function ResetPasswordEntryScreen({
+  navigation,
+}: RootStackScreenProps<'ResetPasswordEntry'>) {
   const form = useForm();
 
   return (
@@ -28,8 +31,17 @@ export default function ResetPasswordEntryScreen() {
               />
             </View>
           </View>
-          <View>
-            <Button mode={'contained'}>Continue</Button>
+          <View style={styles.buttonContainer}>
+            <Button
+              onPress={() =>
+                navigation.navigate('ResetPassword', {
+                  email: form.getValues('email'),
+                })
+              }
+              mode={'contained'}>
+              Continue
+            </Button>
+            <Button>Cancel</Button>
           </View>
         </KeyboardAvoidingView>
       </FormProvider>
@@ -53,6 +65,9 @@ const styles = StyleSheet.create({
     rowGap: 16,
   },
   inputContainer: {
-    marginTop: 64,
+    marginTop: 80,
+  },
+  buttonContainer: {
+    rowGap: 16,
   },
 });
