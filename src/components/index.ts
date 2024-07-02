@@ -7,3 +7,4 @@
  *    \inputs
  *    \modals
  */
+export {default as Button} from './buttons/Button';
