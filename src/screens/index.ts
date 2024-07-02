@@ -13,3 +13,4 @@ export {default as ResetPasswordScreen} from './reset-password/ResetPasswordScre
 export {default as GetStartScreen} from './get-start/GetStartScreen';
 export {default as PreviewScreen} from './preview/PreviewScreen';
 export {default as ResetPasswordEntryScreen} from './reset-password/ResetPasswordEntryScreen';
+export {default as VerifyEmailScreen} from './verify-email/VerifyEmailScreen';

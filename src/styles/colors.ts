@@ -6,6 +6,7 @@ type ColorProps = {
   textWhite: string;
   inputBackgroundColor: string;
   placeholderTextColor: string;
+  blueGray: string;
 };
 
 const color: ColorProps = {
@@ -16,5 +17,6 @@ const color: ColorProps = {
   textWhite: '#FFFFFF',
   inputBackgroundColor: '#03002E',
   placeholderTextColor: '#4F4C7E',
+  blueGray: '#9B97DD',
 };
 export default color;

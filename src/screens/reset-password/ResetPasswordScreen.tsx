@@ -14,6 +14,7 @@ export default function ResetPasswordScreen({
     <HeaderLayout>
       <ScrollView
         style={styles.root}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
           <Text variant={'titleLarge'} style={styles.title}>

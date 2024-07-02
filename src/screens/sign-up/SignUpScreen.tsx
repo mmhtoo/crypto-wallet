@@ -26,7 +26,11 @@ export default function SignUpScreen({
     },
   });
 
-  const onSubmit: SubmitHandler<FormValues> = data => {};
+  const onSubmit: SubmitHandler<FormValues> = data => {
+    navigation.navigate('VerifyEmail', {
+      email: form.getValues('email'),
+    });
+  };
 
   return (
     <AuthLayout onPress={() => navigation.canGoBack() && navigation.goBack()}>
