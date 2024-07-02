@@ -18,6 +18,7 @@ export default function HeaderLayout(
     <SafeAreaLayout>
       <View style={styles.header}>
         <TouchableOpacity
+          activeOpacity={0.7}
           onPress={() => navigation.canGoBack() && navigation.goBack()}>
           <BackArrow width={24} height={24} />
         </TouchableOpacity>

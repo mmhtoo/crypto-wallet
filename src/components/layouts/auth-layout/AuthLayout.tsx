@@ -32,8 +32,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.backgroundColor,
   },
   crossIconContainer: {
-    paddingHorizontal: 24,
-    paddingTop: 24,
+    padding: 24,
     width: 17,
     alignItems: 'center',
   },

@@ -3,9 +3,9 @@ import React from 'react';
 import {GetStartIcon} from 'assets/icons';
 import {color, fontFamily, SIZE} from 'styles';
 import {Button} from 'components';
-import {RootStackScreenProps} from 'types/react-navigation/declarations';
+import {PublicStackScreenProps} from 'types/react-navigation/declarations';
 
-const GetStartScreen = ({navigation}: RootStackScreenProps<'GetStart'>) => {
+const GetStartScreen = ({navigation}: PublicStackScreenProps<'GetStart'>) => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.iconContainer}>

@@ -9,6 +9,7 @@ import {
   TextInput as RNTextInput,
 } from 'react-native';
 import {Text, TextInput, TextInputProps, useTheme} from 'react-native-paper';
+import {color, fontFamily, SIZE} from 'styles';
 
 type ControlledInputProps<T extends FieldValues> = TextInputProps & {
   label?: string;
@@ -53,6 +54,7 @@ export default function ControlledInput<T extends FieldValues>(
         onBlur={field.onBlur}
         disabled={field.disabled}
         ref={field.ref}
+        placeholderTextColor={color.placeholderTextColor}
         error={!!fieldState.error}
       />
       <Text style={{...defaultErrorStyle, ...errorStyle}}>
@@ -67,8 +69,14 @@ const styles = StyleSheet.create({
     rowGap: 8,
   },
   labelStyle: {
-    fontWeight: '700',
-    fontSize: 16,
+    color: color.textWhite,
+    fontFamily: fontFamily.regular,
+    fontSize: SIZE.xl,
   },
-  input: {},
+  input: {
+    backgroundColor: color.inputBackgroundColor,
+    height: 51,
+    borderRadius: 6,
+    borderWidth: 1,
+  },
 });
