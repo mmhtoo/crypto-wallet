@@ -7,6 +7,7 @@ export type RootStackScreenList = {
   ResetPassword: {
     email: string;
   };
+  GetStart: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackScreenList> =
