@@ -1,11 +1,28 @@
+import {
+  CompositeScreenProps,
+  NavigatorScreenParams,
+} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-export type RootStackScreenList = {
+export type PublicStackScreenList = {
   SignIn: undefined;
   SignUp: undefined;
-  ResetPassword: undefined;
+  ResetPasswordEntry: undefined;
+  ResetPassword: {
+    email: string;
+  };
   GetStart: undefined;
   Preview: undefined;
+};
+
+export type PublicStackScreenProps<T extends keyof PublicStackScreenList> =
+  CompositeScreenProps<
+    NativeStackScreenProps<PublicStackScreenList, T>,
+    RootStackScreenProps<keyof RootStackScreenList>
+  >;
+
+export type RootStackScreenList = {
+  PublicStack: NavigatorScreenParams<PublicStackScreenList>;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackScreenList> =

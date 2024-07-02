@@ -6,4 +6,4 @@
  */
 export {default as RootStackNavigator} from './RootStackNavigator';
 export {default as PrivateNavigator} from './PrivateNavigator';
-export {default as PublicNavigator} from './PublicNavigator';
+export {default as PublicStackNavigator} from './PublicStackNavigator';
