@@ -9,17 +9,17 @@ function PublicStackNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName="GetStart">
+      initialRouteName="ResetPasswordEntry">
       <Stack.Screen name="GetStart" component={GetStartScreen} />
       <Stack.Screen name="SignUp" component={SignUpScreen} />
       <Stack.Screen name="SignIn" component={SignInScreen} />
       <Stack.Screen
         name="ResetPasswordEntry"
-        getComponent={() => require('screens').ResetPasswordEntry}
+        getComponent={() => require('screens').ResetPasswordEntryScreen}
       />
       <Stack.Screen
         name="ResetPassword"
-        getComponent={() => require('screens').ResetPassword}
+        getComponent={() => require('screens').ResetPasswordScreen}
       />
     </Stack.Navigator>
   );

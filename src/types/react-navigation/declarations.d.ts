@@ -12,6 +12,7 @@ export type PublicStackScreenList = {
     email: string;
   };
   GetStart: undefined;
+  Preview: undefined;
 };
 
 export type PublicStackScreenProps<T extends keyof PublicStackScreenList> =
