@@ -4,6 +4,7 @@ export type RootStackScreenList = {
   SignIn: undefined;
   SignUp: undefined;
   ResetPassword: undefined;
+  ResetPasswordEntry: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackScreenList> =
