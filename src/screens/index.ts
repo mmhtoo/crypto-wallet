@@ -13,3 +13,6 @@ export {default as ResetPasswordScreen} from './reset-password/ResetPasswordScre
 export {default as GetStartScreen} from './get-start/GetStartScreen';
 export {default as PreviewScreen} from './preview/PreviewScreen';
 export {default as ResetPasswordEntryScreen} from './reset-password/ResetPasswordEntryScreen';
+export {default as WalletScreen} from './wallet/WalletScreen';
+export {default as ProfileScreen} from './profile/ProfileScreen';
+export {default as TransactionHistoryScreen} from './transaction-history/TransactionHistoryScreen';

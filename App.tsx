@@ -8,7 +8,7 @@ import {darkTheme} from './src/constants';
 export default function App(): JSX.Element {
   return (
     <PaperProvider theme={darkTheme}>
-      <StatusBar barStyle={'light-content'} backgroundColor="#000" />
+      <StatusBar barStyle={'light-content'} backgroundColor={'#000'} />
       <NavigationContainer>
         <RootStackNavigator />
       </NavigationContainer>
