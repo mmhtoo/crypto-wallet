@@ -4,6 +4,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {BackArrow} from '../../assets/icons';
 import {Text} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
+import {fontFamily} from 'styles';
 
 type HeaderLayoutProps = {
   title?: string;
@@ -40,6 +41,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: '700',
+    fontFamily: fontFamily.juraBold,
     width: '90%',
     textAlign: 'center',
     marginLeft: 24,
