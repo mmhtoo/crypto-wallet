@@ -5,6 +5,7 @@ import {
   PreviewScreen,
   SignInScreen,
   SignUpScreen,
+  VerifyEmailScreen,
 } from 'screens';
 import {PublicStackScreenList} from 'types/react-navigation/declarations';
 
@@ -18,6 +19,7 @@ function PublicStackNavigator() {
       <Stack.Screen name="GetStart" component={GetStartScreen} />
       <Stack.Screen name="Preview" component={PreviewScreen} />
       <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen name="VerifyEmail" component={VerifyEmailScreen} />
       <Stack.Screen name="SignIn" component={SignInScreen} />
       <Stack.Screen
         name="ResetPasswordEntry"
