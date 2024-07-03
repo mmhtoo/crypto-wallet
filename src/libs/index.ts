@@ -4,3 +4,5 @@
  * \libs
  *  index.ts
  */
+export * from './axios';
+export * from './queryClient';
