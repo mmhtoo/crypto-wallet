@@ -5,3 +5,5 @@ export {default as LockIcon} from './LockIcon';
 export {default as WalletIcon} from './wallet.svg';
 export {default as HistoryIcon} from './history.svg';
 export {default as ProfileIcon} from './profile.svg';
+export {default as CashInIcon} from './cash-in.svg';
+export {default as CashOutIcon} from './cash-out.svg';

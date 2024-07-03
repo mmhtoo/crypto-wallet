@@ -9,6 +9,7 @@ import {Text} from 'react-native-paper';
 import {SvgProps} from 'react-native-svg';
 import {HistoryIcon, ProfileIcon, WalletIcon} from 'assets/icons';
 import {RootBottomTabScreenList} from 'types/react-navigation/declarations';
+import {fontFamily} from 'styles';
 
 const Tab = createBottomTabNavigator<RootBottomTabScreenList>();
 
@@ -67,6 +68,7 @@ const CustomTabBar: FC<BottomTabBarProps> = ({state, navigation}) => {
   const activeIndex = state.index;
   const labelStyle = (isActive: boolean): TextStyle => ({
     color: isActive ? darkTheme.colors?.primary : 'white',
+    fontFamily: fontFamily.regular,
   });
 
   return (
@@ -108,7 +110,6 @@ const styles = StyleSheet.create({
   tabBarItemContainer: {
     justifyContent: 'center',
     paddingHorizontal: 16,
-    paddingVertical: 8,
     alignItems: 'center',
     rowGap: 8,
   },
