@@ -15,7 +15,7 @@ export const darkTheme: ThemeProp = {
   ...MD3DarkTheme,
   colors: {
     ...MD3DarkTheme.colors,
-    background: 'black',
+    background: '#010104',
     primary: '#2914E3',
     secondary: '#03002E',
     error: '#E70000',

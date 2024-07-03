@@ -1,3 +1,4 @@
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {
   CompositeScreenProps,
   NavigatorScreenParams,
@@ -26,10 +27,23 @@ export type PublicStackScreenProps<T extends keyof PublicStackScreenList> =
 
 export type RootStackScreenList = {
   PublicStack: NavigatorScreenParams<PublicStackScreenList>;
+  RootTab: NavigatorScreenParams<RootBottomTabScreenList>;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackScreenList> =
   NativeStackScreenProps<RootStackScreenList, T>;
+
+export type RootBottomTabScreenList = {
+  Wallet: undefined;
+  TransactionHistory: undefined;
+  Profile: undefined;
+};
+
+export type RootBottomTabScreenProps<T extends keyof RootBottomTabScreenList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<RootBottomTabScreenList, T>,
+    RootStackScreenProps<keyof RootStackScreenList>
+  >;
 
 declare global {
   namespace ReactNavigation {
