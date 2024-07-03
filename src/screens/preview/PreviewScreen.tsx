@@ -4,11 +4,11 @@ import {color, fontFamily, SIZE} from 'styles';
 import {AuthLayout, Button} from 'components';
 import {LockIcon} from 'assets/icons';
 import PreviewItem from './components/PreviewItem';
-import {RootStackScreenProps} from 'types/react-navigation/declarations';
+import {PublicStackScreenProps} from 'types/react-navigation/declarations';
 
-const PreviewScreen = ({navigation}: RootStackScreenProps<'Preview'>) => {
+const PreviewScreen = ({navigation}: PublicStackScreenProps<'Preview'>) => {
   return (
-    <AuthLayout onPress={() => navigation.goBack()}>
+    <AuthLayout onPress={() => navigation.canGoBack() && navigation.goBack()}>
       <View style={styles.mainContainer}>
         <View style={styles.lockIcon}>
           <LockIcon />
@@ -25,7 +25,12 @@ const PreviewScreen = ({navigation}: RootStackScreenProps<'Preview'>) => {
           </View>
         </View>
         <View style={{paddingBottom: 80}}>
-          <Button title="Continue" onPress={() => {}} />
+          <Button
+            title="Continue"
+            onPress={() => {
+              navigation.navigate('SignUp');
+            }}
+          />
         </View>
       </View>
     </AuthLayout>

@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator<RootStackScreenList>();
 export default function RootStackNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName={'RootTab'}
+      initialRouteName={'PublicStack'}
       screenOptions={{
         headerShown: false,
       }}>
