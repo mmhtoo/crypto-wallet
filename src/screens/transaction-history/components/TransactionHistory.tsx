@@ -4,6 +4,8 @@ import {StyleSheet, TextStyle, TouchableOpacity, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import {fontFamily} from 'styles';
 import dayjs from 'dayjs';
+import {useNavigation} from '@react-navigation/native';
+import {RootBottomTabScreenProps} from 'types/react-navigation/declarations';
 
 type TTransactionHistoryProps = {
   transactionType: 'cash-in' | 'cash-out';
@@ -19,8 +21,19 @@ export default function TransactionHistory(props: TTransactionHistoryProps) {
   const amountStyle: TextStyle = {
     color: isPlus ? '#17b978' : '#E70000',
   };
+
+  const navigation =
+    useNavigation<
+      RootBottomTabScreenProps<'TransactionHistory'>['navigation']
+    >();
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('TransactionHistoryDetail', {
+          transactionHash: '',
+        })
+      }>
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.historyType}>{label}</Text>

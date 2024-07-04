@@ -15,6 +15,10 @@ export default function RootStackNavigator() {
       }}>
       <Stack.Screen name="PublicStack" component={PublicStackNavigator} />
       <Stack.Screen name="RootTab" component={RootBottomTabNavigator} />
+      <Stack.Screen
+        name="TransactionHistoryDetail"
+        getComponent={() => require('screens').TransactionHistoryDetailScreen}
+      />
     </Stack.Navigator>
   );
 }

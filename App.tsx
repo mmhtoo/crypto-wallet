@@ -7,18 +7,21 @@ import {darkTheme} from './src/constants';
 import {color} from 'styles';
 import {QueryClientProvider} from '@tanstack/react-query';
 import {queryClient} from 'libs';
+import {ToastProvider} from 'react-native-toast-notifications';
 
 export default function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <PaperProvider theme={darkTheme}>
-        <StatusBar
-          barStyle={'light-content'}
-          backgroundColor={color.backgroundColor}
-        />
-        <NavigationContainer>
-          <RootStackNavigator />
-        </NavigationContainer>
+        <ToastProvider>
+          <StatusBar
+            barStyle={'light-content'}
+            backgroundColor={color.backgroundColor}
+          />
+          <NavigationContainer>
+            <RootStackNavigator />
+          </NavigationContainer>
+        </ToastProvider>
       </PaperProvider>
     </QueryClientProvider>
   );

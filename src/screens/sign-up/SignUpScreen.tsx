@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {color, fontFamily, SIZE} from 'styles';
 import {PublicStackScreenProps} from 'types/react-navigation/declarations';
+import {Button as PaperButton} from 'react-native-paper';
 
 type FormValues = {
   name: string;
@@ -62,6 +63,9 @@ export default function SignUpScreen({
           </View>
           <View style={{paddingBottom: 40}}>
             <Button title="Next" onPress={form.handleSubmit(onSubmit)} />
+            <PaperButton onPress={() => navigation.navigate('SignIn')}>
+              Already had an account?
+            </PaperButton>
             <View style={{marginTop: 10}}>
               <Text style={styles.byTappingText}>
                 By tapping “Get Started” you agree and consent to our

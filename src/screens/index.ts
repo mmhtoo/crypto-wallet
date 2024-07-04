@@ -17,3 +17,4 @@ export {default as VerifyEmailScreen} from './verify-email/VerifyEmailScreen';
 export {default as WalletScreen} from './wallet/WalletScreen';
 export {default as ProfileScreen} from './profile/ProfileScreen';
 export {default as TransactionHistoryScreen} from './transaction-history/TransactionHistoryScreen';
+export {default as TransactionHistoryDetailScreen} from './transaction-history/TransactionHistoryDetailScreen';
