@@ -43,6 +43,7 @@ export function useRequestOTP() {
   return {
     isPending,
     mutateAsync,
+    error,
   };
 }
 

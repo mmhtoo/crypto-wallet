@@ -1,15 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {ControlledInput, HeaderLayout} from '../../components';
 import {PublicStackScreenProps} from '../../types/react-navigation/declarations';
-import {FormProvider, useForm} from 'react-hook-form';
+import {FormProvider} from 'react-hook-form';
+import {color} from 'styles';
+import {useResetPassword} from './hooks/useResetPassword';
 
 export default function ResetPasswordScreen({
   route,
 }: PublicStackScreenProps<'ResetPassword'>) {
   const {email} = route.params;
-  const form = useForm();
+  const {form, isPending, submit} = useResetPassword();
+
+  useEffect(() => {
+    form.setValue('email', email);
+  }, [email, form]);
+
   return (
     <HeaderLayout>
       <ScrollView
@@ -21,7 +28,8 @@ export default function ResetPasswordScreen({
             Verify reset password
           </Text>
           <Text>
-            We have sent OTP to {email} and Please kindly check in your email!
+            We have sent OTP to <Text style={styles.email}>{email}</Text> and
+            Please kindly check in your email!
           </Text>
         </View>
         <FormProvider {...form}>
@@ -33,7 +41,7 @@ export default function ResetPasswordScreen({
             />
             <ControlledInput
               label={'New password'}
-              fieldName="newPassword"
+              fieldName="password"
               placeholder="New password"
               secureTextEntry
             />
@@ -45,8 +53,10 @@ export default function ResetPasswordScreen({
             />
           </View>
           <View style={styles.buttonContainer}>
-            <Button>Didn't receive the code?</Button>
-            <Button mode={'contained'}>Confirm</Button>
+            <Button disabled={isPending}>Didn't receive the code?</Button>
+            <Button onPress={submit} disabled={isPending} mode={'contained'}>
+              {isPending ? 'Confirming...' : 'Confirm'}
+            </Button>
           </View>
         </FormProvider>
       </ScrollView>
@@ -74,5 +84,8 @@ const styles = StyleSheet.create({
   buttonContainer: {marginTop: 16, rowGap: 16},
   scrollContent: {
     paddingBottom: 64,
+  },
+  email: {
+    color: color.primaryColor,
   },
 });
