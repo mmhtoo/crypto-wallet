@@ -7,3 +7,4 @@
  *    \transaction
  *    \auth
  */
+export * from './account/requestOTP';
