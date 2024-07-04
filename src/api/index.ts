@@ -9,3 +9,4 @@
  */
 export * from './account/requestOTP';
 export * from './account/resetPassword';
+export * from './account/verifyToken';

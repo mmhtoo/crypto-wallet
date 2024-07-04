@@ -4,3 +4,4 @@
  * \hooks
  *  index.ts
  */
+export * from './useGetProfile';
