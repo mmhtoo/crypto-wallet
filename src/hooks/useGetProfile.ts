@@ -10,10 +10,11 @@ import {
   PublicStackScreenProps,
 } from 'types/react-navigation/declarations';
 
-export default function useGetProfile() {
+export function useGetProfile(enabledQuery: boolean = false) {
   const queryResult = useQuery({
     queryKey: [CACHE_KEYS.PROFILE],
     queryFn: verifyToken,
+    enabled: enabledQuery,
   });
   const {error} = queryResult;
   const navigation =
@@ -31,7 +32,9 @@ export default function useGetProfile() {
       // eslint-disable-next-line eqeqeq
       if (error.response?.status == HttpStatusCode.Unauthorized) {
         // should login back
-        toast.show('Session expired!');
+        toast.show('Session expired, Please login back!', {
+          type: 'danger',
+        });
         navigation.reset({
           index: 0,
           routes: [
