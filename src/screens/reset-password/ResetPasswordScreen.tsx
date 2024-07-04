@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {ControlledInput, HeaderLayout} from '../../components';
@@ -6,12 +6,29 @@ import {PublicStackScreenProps} from '../../types/react-navigation/declarations'
 import {FormProvider} from 'react-hook-form';
 import {color} from 'styles';
 import {useResetPassword} from './hooks/useResetPassword';
+import {useRequestOTP} from './hooks/useRequestOTP';
+import {useToast} from 'react-native-toast-notifications';
 
 export default function ResetPasswordScreen({
   route,
 }: PublicStackScreenProps<'ResetPassword'>) {
   const {email} = route.params;
   const {form, isPending, submit} = useResetPassword();
+  const {
+    error: requestOTPError,
+    isPending: isRequestingOTP,
+    mutateAsync: requestOTP,
+  } = useRequestOTP();
+  const toast = useToast();
+
+  const onPressRequestOTP = useCallback(async () => {
+    await requestOTP(email);
+    if (!requestOTPError) {
+      toast.show('OTP was sent!', {
+        type: 'success!',
+      });
+    }
+  }, [requestOTP, toast, email, requestOTPError]);
 
   useEffect(() => {
     form.setValue('email', email);
@@ -53,7 +70,11 @@ export default function ResetPasswordScreen({
             />
           </View>
           <View style={styles.buttonContainer}>
-            <Button disabled={isPending}>Didn't receive the code?</Button>
+            <Button
+              onPress={onPressRequestOTP}
+              disabled={isPending || isRequestingOTP}>
+              {isRequestingOTP ? 'Sending OTP...' : "Didn't receive the code?"}
+            </Button>
             <Button onPress={submit} disabled={isPending} mode={'contained'}>
               {isPending ? 'Confirming...' : 'Confirm'}
             </Button>

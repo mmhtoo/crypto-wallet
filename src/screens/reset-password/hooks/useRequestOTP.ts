@@ -27,15 +27,21 @@ export function useRequestOTP() {
   const toast = useToast();
 
   useEffect(() => {
-    if (error) {
-      console.log('Error at useRequestOTP ', error);
-      if (error instanceof AxiosError) {
-        // eslint-disable-next-line eqeqeq
-        if (error.response?.status == HttpStatusCode.NotFound) {
-          toast.show(error.message, {
-            type: 'danger',
-          });
-        }
+    if (!error) {
+      return;
+    }
+    console.log('Error at useRequestOTP ', error);
+    if (error instanceof AxiosError) {
+      // eslint-disable-next-line eqeqeq
+      if (error.response?.status == HttpStatusCode.NotFound) {
+        toast.show(error.message, {
+          type: 'danger',
+        });
+      }
+      if (error.response?.status == HttpStatusCode.BadRequest) {
+        toast.show('Failed to send OTP!', {
+          type: 'danger',
+        });
       }
     }
   }, [error, data, toast]);
