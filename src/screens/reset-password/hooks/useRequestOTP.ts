@@ -38,6 +38,7 @@ export function useRequestOTP() {
           type: 'danger',
         });
       }
+      // eslint-disable-next-line eqeqeq
       if (error.response?.status == HttpStatusCode.BadRequest) {
         toast.show('Failed to send OTP!', {
           type: 'danger',
