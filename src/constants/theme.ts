@@ -1,6 +1,25 @@
 import {ThemeProp} from 'react-native-paper/lib/typescript/types';
-import {MD3LightTheme} from 'react-native-paper';
+import {MD3DarkTheme, MD3LightTheme} from 'react-native-paper';
 
-export const theme: ThemeProp = {
+export const lightTheme: ThemeProp = {
   ...MD3LightTheme,
+  colors: {
+    primary: '#2914E3',
+    secondary: '#03002E',
+    error: '#E70000',
+    onPrimary: '#EAE9FC',
+  },
+};
+
+export const darkTheme: ThemeProp = {
+  ...MD3DarkTheme,
+  colors: {
+    ...MD3DarkTheme.colors,
+    background: '#010104',
+    primary: '#2914E3',
+    secondary: '#03002E',
+    error: '#E70000',
+    onPrimary: '#EAE9FC',
+  },
+  roundness: 1.5,
 };

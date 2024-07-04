@@ -1,3 +1,5 @@
-function PrivateNavigator() {}
+function PrivateNavigator() {
+  return <></>;
+}
 
 export default PrivateNavigator;

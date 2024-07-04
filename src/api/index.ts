@@ -7,3 +7,5 @@
  *    \transaction
  *    \auth
  */
+export * from './account/requestOTP';
+export * from './account/resetPassword';
