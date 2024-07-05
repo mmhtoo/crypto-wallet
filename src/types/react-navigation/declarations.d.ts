@@ -28,6 +28,9 @@ export type PublicStackScreenProps<T extends keyof PublicStackScreenList> =
 export type RootStackScreenList = {
   PublicStack: NavigatorScreenParams<PublicStackScreenList>;
   RootTab: NavigatorScreenParams<RootBottomTabScreenList>;
+  TransactionHistoryDetail: {
+    transactionHash: string;
+  };
 };
 
 export type RootStackScreenProps<T extends keyof RootStackScreenList> =
