@@ -29,7 +29,6 @@ export function useSignUp() {
   const form = useForm<FormType>({
     resolver: zodResolver(schema),
   });
-  console.log(form.formState.errors);
   const {mutateAsync, isPending, error} = useMutation({
     mutationKey: ['sign-up'],
     mutationFn: signUp,
@@ -65,8 +64,8 @@ export function useSignUp() {
         setTimeout(async () => {
           await createWallet({
             user: user.id,
-            address: '',
-            balance: '',
+            address: 'aa',
+            balance: '1234',
           });
           if (createWalletError) {
             toast.show('Wallet create failed!');
