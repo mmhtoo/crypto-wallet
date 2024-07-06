@@ -5,3 +5,4 @@
  *  index.ts
  */
 export * from './useGetProfile';
+export * from './useReduxHooks';
