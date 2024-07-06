@@ -1,6 +1,6 @@
 import {AuthLayout, ControlledInput} from 'components';
 import React from 'react';
-import {FormProvider, SubmitHandler, useForm} from 'react-hook-form';
+import {FormProvider} from 'react-hook-form';
 import {
   KeyboardAvoidingView,
   Platform,

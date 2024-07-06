@@ -5,6 +5,7 @@ import {AuthLayout, Button} from 'components';
 import {LockIcon} from 'assets/icons';
 import PreviewItem from './components/PreviewItem';
 import {PublicStackScreenProps} from 'types/react-navigation/declarations';
+import {Button as PaperButton} from 'react-native-paper';
 
 const PreviewScreen = ({navigation}: PublicStackScreenProps<'Preview'>) => {
   return (
@@ -31,6 +32,9 @@ const PreviewScreen = ({navigation}: PublicStackScreenProps<'Preview'>) => {
               navigation.navigate('SignUp');
             }}
           />
+          <PaperButton onPress={() => navigation.navigate('SignIn')}>
+            Already had an account?
+          </PaperButton>
         </View>
       </View>
     </AuthLayout>

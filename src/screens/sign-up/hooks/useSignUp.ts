@@ -76,7 +76,15 @@ export function useSignUp() {
         navigation.navigate('RootTab', {screen: 'Wallet'});
       }
     })();
-  }, [mutateAsync, handleSubmit, toast, navigation]);
+  }, [
+    mutateAsync,
+    handleSubmit,
+    toast,
+    navigation,
+    createWallet,
+    dispatch,
+    createWalletError,
+  ]);
 
   useEffect(() => {
     if (error) {
