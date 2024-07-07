@@ -1,14 +1,20 @@
 import {ProfileIcon} from 'assets/icons';
 import {SafeAreaLayout} from 'components';
+import dayjs from 'dayjs';
+import {useAppSelector, useLogout} from 'hooks';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Divider, Text} from 'react-native-paper';
+import {selectUserInfo} from 'redux/slices/user-slice/userSlice';
 import {fontFamily} from 'styles';
 
 export default function ProfileScreen() {
+  const userInfo = useAppSelector(selectUserInfo);
+  const logout = useLogout();
+
   return (
     <SafeAreaLayout>
-      <View style={styles.root}>
+      <ScrollView style={styles.root}>
         <ProfileIcon
           width={64}
           height={64}
@@ -21,23 +27,53 @@ export default function ProfileScreen() {
         <View style={styles.infoContainer}>
           <View style={styles.infoWrapper}>
             <Text style={styles.infoLabel}>Username</Text>
-            <Text style={styles.infoValue}>Lionel</Text>
+            <Text style={styles.infoValue}>
+              {userInfo ? userInfo.username : '...'}
+            </Text>
           </View>
           <Divider />
           <View style={styles.infoWrapper}>
             <Text style={styles.infoLabel}>Email</Text>
-            <Text style={styles.infoValue}>lionel@gmail.com</Text>
+            <Text style={styles.infoValue}>
+              {userInfo ? userInfo.email : '...'}
+            </Text>
           </View>
           <Divider />
           <View style={styles.infoWrapper}>
             <Text style={styles.infoLabel}>Date of Birth</Text>
-            <Text style={styles.infoValue}>01-01-2000</Text>
+            <Text style={styles.infoValue}>
+              {userInfo
+                ? userInfo.date_of_birth
+                  ? dayjs(userInfo.date_of_birth).format('YY-MM-YYYY')
+                  : '-'
+                : '...'}
+            </Text>
+          </View>
+          <Divider />
+          <View style={styles.infoWrapper}>
+            <Text style={styles.infoLabel}>Last login date</Text>
+            <Text style={styles.infoValue}>
+              {userInfo
+                ? userInfo.last_login
+                  ? dayjs(userInfo.last_login).format('YY-MM-YYYY')
+                  : '-'
+                : '...'}
+            </Text>
+          </View>
+          <Divider />
+          <View style={styles.infoWrapper}>
+            <Text style={styles.infoLabel}>Last login IP</Text>
+            <Text style={styles.infoValue}>
+              {userInfo ? userInfo.last_login_ip : '...'}
+            </Text>
           </View>
           <Divider />
 
-          <Button style={styles.logoutBtn}>Logout</Button>
+          <Button onPress={logout} style={styles.logoutBtn}>
+            Logout
+          </Button>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaLayout>
   );
 }
@@ -45,7 +81,7 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    paddingTop: 80,
+    paddingTop: 20,
   },
   profileIcon: {
     padding: 8,

@@ -29,6 +29,7 @@ export function useSignIn() {
     onError: err => {
       console.log('Error at useSignIn ', err);
       if (err instanceof AxiosError) {
+        // eslint-disable-next-line eqeqeq
         if (err.response?.status == HttpStatusCode.Unauthorized) {
           return toast.show('Bad Credentials!', {
             type: 'danger',
@@ -47,7 +48,6 @@ export function useSignIn() {
     useNavigation<RootStackScreenProps<'PublicStack'>['navigation']>();
   const submitSignIn = useCallback(() => {
     handleSubmit(async formData => {
-      console.log(formData);
       const response = await mutateAsync(formData);
       const responseBody = response.data;
 
