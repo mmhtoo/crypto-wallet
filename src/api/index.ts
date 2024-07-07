@@ -6,3 +6,4 @@ export * from './account/resetPassword';
 export * from './account/verifyToken';
 export * from './account/signIn';
 export * from './account/refreshToken';
+export * from './wallet/getWalletDetail';

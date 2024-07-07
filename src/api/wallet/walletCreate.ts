@@ -2,7 +2,7 @@ import {AxiosResponse} from 'axios';
 import {axiosInstance} from 'libs';
 
 export type WalletCreateParam = {
-  user: string;
+  user: number;
   address: string;
   balance: string;
 };
