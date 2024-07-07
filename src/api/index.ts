@@ -1,13 +1,8 @@
 /*
  * place network call integrations inside this folder
- * for example:
- * \api
- *  index.ts
- *    \wallet
- *    \transaction
- *    \auth
  */
 export * from './account/requestOTP';
 export * from './account/resetPassword';
 export * from './account/verifyToken';
 export * from './account/signIn';
+export * from './account/refreshToken';

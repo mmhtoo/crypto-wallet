@@ -34,7 +34,7 @@ export interface InfoResponse {
 export default async function verifyToken() {
   try {
     const response: AxiosResponse<UserData | InfoResponse> =
-      await axiosInstance.get('/auth/token/verify');
+      await axiosInstance.get('/auth/token/verify/');
     return response;
   } catch (e) {
     console.log('Error at verifyToken ', e);
