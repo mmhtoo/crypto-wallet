@@ -34,11 +34,7 @@ export function useSignUp() {
     mutationFn: signUp,
   });
 
-  const {
-    mutateAsync: createWallet,
-    isPending: pending,
-    error: createWalletError,
-  } = useMutation({
+  const {mutateAsync: createWallet, error: createWalletError} = useMutation({
     mutationKey: ['wallet-create'],
     mutationFn: walletCreate,
   });
@@ -76,16 +72,26 @@ export function useSignUp() {
         navigation.navigate('RootTab', {screen: 'Wallet'});
       }
     })();
-  }, [mutateAsync, handleSubmit, toast, navigation]);
+  }, [
+    mutateAsync,
+    handleSubmit,
+    toast,
+    navigation,
+    createWallet,
+    dispatch,
+    createWalletError,
+  ]);
 
   useEffect(() => {
     if (error) {
       console.log('Error at useSignUp', error);
       if (error instanceof AxiosError) {
+        // eslint-disable-next-line eqeqeq
         if (error.response?.status == HttpStatusCode.BadRequest) {
           toast.show('Failed to sign up!', {
             type: 'danger',
           });
+          // eslint-disable-next-line eqeqeq
         } else if (error.response?.status == HttpStatusCode.Conflict) {
           toast.show('Account with that email already exists', {
             type: 'danger',

@@ -4,8 +4,11 @@ import {ControlledInput, SafeAreaLayout} from 'components';
 import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
 import {FormProvider} from 'react-hook-form';
 import {useRequestOTPForm} from './hooks/useRequestOTP';
+import {PublicStackScreenProps} from 'types/react-navigation/declarations';
 
-export default function ResetPasswordEntryScreen() {
+export default function ResetPasswordEntryScreen({
+  navigation,
+}: PublicStackScreenProps<'ResetPasswordEntry'>) {
   const {form, isPending, submit} = useRequestOTPForm();
 
   return (
@@ -33,7 +36,11 @@ export default function ResetPasswordEntryScreen() {
             <Button disabled={isPending} onPress={submit} mode={'contained'}>
               {isPending ? 'Loading...' : 'Continue'}
             </Button>
-            <Button disabled={isPending}>Cancel</Button>
+            <Button
+              onPress={() => navigation.canGoBack() && navigation.goBack()}
+              disabled={isPending}>
+              Cancel
+            </Button>
           </View>
         </KeyboardAvoidingView>
       </FormProvider>

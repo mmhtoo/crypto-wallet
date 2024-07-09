@@ -20,7 +20,7 @@ const schema = z.object({
 type FormType = z.infer<typeof schema>;
 
 export function useRequestOTP() {
-  const {mutateAsync, isPending, error, data} = useMutation({
+  const {mutateAsync, isPending, error} = useMutation({
     mutationKey: ['request-otp'],
     mutationFn: requestOTP,
   });
@@ -45,7 +45,7 @@ export function useRequestOTP() {
         });
       }
     }
-  }, [error, data, toast]);
+  }, [error, toast]);
 
   return {
     isPending,
