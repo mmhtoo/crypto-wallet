@@ -13,7 +13,7 @@ type WalletDetailProps = {
 };
 
 export default function WalletDetail(props: WalletDetailProps) {
-  const {address, balance} = props;
+  const {address, balance, onRefresh, isRefetching} = props;
   return (
     <View style={styles.container}>
       <TouchableOpacity>
@@ -36,10 +36,10 @@ export default function WalletDetail(props: WalletDetailProps) {
             <Text>Receive</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity disabled={isRefetching} onPress={onRefresh}>
           <View style={styles.actionItem}>
             <ReloadIcon width={24} height={24} fill={'#fff'} />
-            <Text>Refresh</Text>
+            <Text>{isRefetching ? 'Refreshing...' : 'Refresh'}</Text>
           </View>
         </TouchableOpacity>
       </View>
