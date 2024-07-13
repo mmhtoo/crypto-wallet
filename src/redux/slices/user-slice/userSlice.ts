@@ -21,7 +21,7 @@ export type StateType = {
     phone?: string;
     username: string;
     photo: string;
-    date_of_birth?: Date;
+    date_of_birth?: Date | string;
     groups: string[];
     user_permissions: string[];
   };

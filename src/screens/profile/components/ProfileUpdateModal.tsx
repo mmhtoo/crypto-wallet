@@ -1,9 +1,14 @@
 import {ControlledInput} from 'components';
-import React, {useEffect} from 'react';
-import {FormProvider, useForm} from 'react-hook-form';
+import dayjs from 'dayjs';
+import React, {useEffect, useState} from 'react';
+import {FormProvider} from 'react-hook-form';
 import {StyleSheet, View, Modal} from 'react-native';
+import DatePicker from 'react-native-date-picker';
 import {Button, Text} from 'react-native-paper';
 import {color, fontFamily} from 'styles';
+import useUpdateProfile, {
+  OnAfterUpdateCallback,
+} from '../hooks/useUpdateProfile';
 
 interface IProfileUpdateModalProps {
   show: boolean;
@@ -13,16 +18,24 @@ interface IProfileUpdateModalProps {
     dob: Date | string;
   };
   closeModal: () => void;
+  onAfterUpdate: OnAfterUpdateCallback;
 }
 
+const TODAY = new Date();
+
 export default function ProfileUpdateModal(props: IProfileUpdateModalProps) {
-  const {show, initialData, closeModal} = props;
-  const form = useForm();
+  const {show, initialData, closeModal, onAfterUpdate} = props;
+  const [dob, setDob] = useState(TODAY);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const {form, isPending, onSubmit} = useUpdateProfile(result => {
+    closeModal();
+    onAfterUpdate(result);
+  });
 
   useEffect(() => {
     form.setValue('username', initialData.username);
     form.setValue('email', initialData.email);
-    form.setValue('dob', initialData.dob);
+    form.setValue('dob', initialData.dob.toString());
   }, [initialData, form]);
 
   return (
@@ -50,19 +63,48 @@ export default function ProfileUpdateModal(props: IProfileUpdateModalProps) {
                 readOnly
               />
               <View>
-                <ControlledInput
-                  label={'Date of Birth'}
-                  fieldName={'dob'}
-                  placeholder="Your Birthday"
-                  readOnly
-                />
-                <Button>Choose</Button>
+                <View>
+                  <ControlledInput
+                    fieldName={'dob'}
+                    label={'Date of Birth'}
+                    placeholder="Your Birthday"
+                    readOnly
+                  />
+                  <DatePicker
+                    modal
+                    theme={'dark'}
+                    date={dob}
+                    onCancel={() => {
+                      setShowDatePicker(false);
+                      setDob(
+                        initialData.dob === '-'
+                          ? new Date()
+                          : (initialData.dob as Date),
+                      );
+                    }}
+                    onConfirm={date => {
+                      setShowDatePicker(false);
+                      setDob(date);
+                      form.setValue('dob', dayjs(date).format('YYYY-MM-DD'));
+                    }}
+                    open={showDatePicker}
+                    maximumDate={TODAY}
+                  />
+                  <Button onPress={() => setShowDatePicker(true)}>
+                    Choose
+                  </Button>
+                </View>
               </View>
             </FormProvider>
           </View>
+
           <View style={styles.btnContainer}>
-            <Button onPress={closeModal}>Cancel</Button>
-            <Button mode={'contained'}>Update</Button>
+            <Button disabled={isPending} onPress={closeModal}>
+              Cancel
+            </Button>
+            <Button disabled={isPending} onPress={onSubmit} mode={'contained'}>
+              {isPending ? 'Updating...' : 'Update'}
+            </Button>
           </View>
         </View>
       </View>
@@ -89,13 +131,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   formContainer: {
-    flex: 1,
     paddingTop: 24,
+    flex: 1,
   },
   btnContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     columnGap: 32,
-    paddingBottom: 16,
+  },
+  btn: {
+    backgroundColor: 'red',
   },
 });

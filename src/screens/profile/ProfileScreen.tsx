@@ -1,19 +1,39 @@
 import {ProfileIcon} from 'assets/icons';
 import {SafeAreaLayout} from 'components';
 import dayjs from 'dayjs';
-import {useAppSelector, useLogout} from 'hooks';
-import React, {useState} from 'react';
+import {useAppDispatch, useAppSelector, useLogout} from 'hooks';
+import React, {useCallback, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Divider, Text} from 'react-native-paper';
-import {selectUserInfo} from 'redux/slices/user-slice/userSlice';
+import {addUserInfo, selectUserInfo} from 'redux/slices/user-slice/userSlice';
 import {fontFamily} from 'styles';
 import ProfileUpdateModal from './components/ProfileUpdateModal';
+import {OnAfterUpdateCallback} from './hooks/useUpdateProfile';
 
 export default function ProfileScreen() {
   const userInfo = useAppSelector(selectUserInfo);
   const logout = useLogout();
   // profile update modal state
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const afterUpdateCallback: OnAfterUpdateCallback = useCallback(
+    data => {
+      if (!userInfo) {
+        return;
+      }
+      dispatch(
+        addUserInfo({
+          userInfo: {
+            ...userInfo,
+            username: data.username,
+            date_of_birth: data.dob,
+          },
+        }),
+      );
+    },
+    [dispatch, userInfo],
+  );
 
   return (
     <SafeAreaLayout>
@@ -36,6 +56,7 @@ export default function ProfileScreen() {
             email: userInfo?.email || '-',
             dob: userInfo?.date_of_birth || '-',
           }}
+          onAfterUpdate={afterUpdateCallback}
         />
         <View style={styles.infoContainer}>
           <View style={styles.infoWrapper}>
