@@ -2,15 +2,18 @@ import {ProfileIcon} from 'assets/icons';
 import {SafeAreaLayout} from 'components';
 import dayjs from 'dayjs';
 import {useAppSelector, useLogout} from 'hooks';
-import React from 'react';
+import React, {useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Divider, Text} from 'react-native-paper';
 import {selectUserInfo} from 'redux/slices/user-slice/userSlice';
 import {fontFamily} from 'styles';
+import ProfileUpdateModal from './components/ProfileUpdateModal';
 
 export default function ProfileScreen() {
   const userInfo = useAppSelector(selectUserInfo);
   const logout = useLogout();
+  // profile update modal state
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   return (
     <SafeAreaLayout>
@@ -22,8 +25,18 @@ export default function ProfileScreen() {
           style={styles.profileIcon}
         />
         <View style={styles.editBtnContainer}>
-          <Button>Edit</Button>
+          <Button onPress={() => setShowUpdateModal(true)}>Edit</Button>
         </View>
+        {/* update profile modal */}
+        <ProfileUpdateModal
+          show={showUpdateModal}
+          closeModal={() => setShowUpdateModal(false)}
+          initialData={{
+            username: userInfo?.username || '-',
+            email: userInfo?.email || '-',
+            dob: userInfo?.date_of_birth || '-',
+          }}
+        />
         <View style={styles.infoContainer}>
           <View style={styles.infoWrapper}>
             <Text style={styles.infoLabel}>Username</Text>
