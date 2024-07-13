@@ -1,9 +1,10 @@
 import {ReloadIcon, SendIcon} from 'assets/icons';
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
-import {color, fontFamily} from 'styles';
+import {fontFamily} from 'styles';
+import WalletReceiveModal from './WalletReceiveModal';
 
 type WalletDetailProps = {
   address: string;
@@ -14,10 +15,15 @@ type WalletDetailProps = {
 
 export default function WalletDetail(props: WalletDetailProps) {
   const {address, balance, onRefresh, isRefetching} = props;
+
+  const [showReceiveModal, setShowReceiveModal] = useState(false);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <QRCode value={address} size={220} color={color.primaryColor} />
+      <TouchableOpacity onPress={() => setShowReceiveModal(true)}>
+        <View style={styles.qrCode}>
+          <QRCode value={address} size={220} />
+        </View>
       </TouchableOpacity>
       <View style={styles.balanceContainer}>
         <Text style={styles.balanceLabel}>Balance: </Text>
@@ -30,12 +36,20 @@ export default function WalletDetail(props: WalletDetailProps) {
             <Text>Transfer</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <View style={styles.actionItem}>
-            <SendIcon width={24} height={24} fill={'#fff'} />
-            <Text>Receive</Text>
-          </View>
-        </TouchableOpacity>
+        {/* receive */}
+        <>
+          <TouchableOpacity onPress={() => setShowReceiveModal(true)}>
+            <View style={styles.actionItem}>
+              <SendIcon width={24} height={24} fill={'#fff'} />
+              <Text>Receive</Text>
+            </View>
+          </TouchableOpacity>
+          <WalletReceiveModal
+            show={showReceiveModal}
+            closeModal={() => setShowReceiveModal(false)}
+            address={address}
+          />
+        </>
         <TouchableOpacity disabled={isRefetching} onPress={onRefresh}>
           <View style={styles.actionItem}>
             <ReloadIcon width={24} height={24} fill={'#fff'} />
@@ -80,5 +94,10 @@ const styles = StyleSheet.create({
   actionItem: {
     rowGap: 8,
     alignItems: 'center',
+  },
+  qrCode: {
+    width: 220,
+    borderRadius: 8,
+    overflow: 'hidden',
   },
 });
