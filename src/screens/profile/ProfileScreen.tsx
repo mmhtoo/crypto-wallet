@@ -37,7 +37,7 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaLayout>
-      <ScrollView style={styles.root}>
+      <ScrollView contentContainerStyle={styles.root}>
         <ProfileIcon
           width={64}
           height={64}
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     paddingTop: 20,
+    justifyContent: 'center',
   },
   profileIcon: {
     padding: 8,

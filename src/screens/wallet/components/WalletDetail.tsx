@@ -1,10 +1,11 @@
 import {ReloadIcon, SendIcon} from 'assets/icons';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
 import {fontFamily} from 'styles';
 import WalletReceiveModal from './WalletReceiveModal';
+import WalletTransferModal from './WalletTransferModal';
 
 type WalletDetailProps = {
   address: string;
@@ -17,12 +18,13 @@ export default function WalletDetail(props: WalletDetailProps) {
   const {address, balance, onRefresh, isRefetching} = props;
 
   const [showReceiveModal, setShowReceiveModal] = useState(false);
+  const [showTransferModal, setShowTransferModal] = useState(false);
 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => setShowReceiveModal(true)}>
         <View style={styles.qrCode}>
-          <QRCode value={address} size={220} />
+          <QRCode value={address} size={260} backgroundColor={'white'} />
         </View>
       </TouchableOpacity>
       <View style={styles.balanceContainer}>
@@ -30,12 +32,24 @@ export default function WalletDetail(props: WalletDetailProps) {
         <Text style={styles.balance}>{balance ? balance : '...'}</Text>
       </View>
       <View style={styles.actionContainer}>
-        <TouchableOpacity>
-          <View style={styles.actionItem}>
-            <SendIcon width={24} height={24} fill={'#fff'} />
-            <Text>Transfer</Text>
-          </View>
-        </TouchableOpacity>
+        {/* transfer */}
+        <>
+          <TouchableOpacity onPress={() => setShowTransferModal(true)}>
+            <View style={styles.actionItem}>
+              <SendIcon width={24} height={24} fill={'#fff'} />
+              <Text>Transfer</Text>
+            </View>
+          </TouchableOpacity>
+          <WalletTransferModal
+            show={showTransferModal}
+            address={address}
+            closeModal={useCallback(
+              () => setShowTransferModal(false),
+              [setShowTransferModal],
+            )}
+            totalBalance={balance}
+          />
+        </>
         {/* receive */}
         <>
           <TouchableOpacity onPress={() => setShowReceiveModal(true)}>
@@ -66,6 +80,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 40,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   balanceLabel: {
     fontSize: 20,
@@ -96,8 +111,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   qrCode: {
-    width: 220,
+    width: 280,
+    height: 280,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
     borderRadius: 8,
-    overflow: 'hidden',
   },
 });

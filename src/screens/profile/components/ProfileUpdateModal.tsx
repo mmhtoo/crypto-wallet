@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     columnGap: 32,
+    paddingBottom: 32,
   },
   btn: {
     backgroundColor: 'red',

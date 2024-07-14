@@ -1,8 +1,7 @@
-import Clipboard from '@react-native-community/clipboard';
 import {CloseIcon} from 'assets/icons';
-import React, {useCallback, useState} from 'react';
+import React from 'react';
 import {Modal, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {Button, Text} from 'react-native-paper';
+import {Text} from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
 import {color} from 'styles';
 
@@ -14,18 +13,6 @@ type WalletReceiveModalPropsType = {
 
 export default function WalletReceiveModal(props: WalletReceiveModalPropsType) {
   const {show, closeModal, address} = props;
-  const [hasCopied, setHasCopied] = useState(false);
-
-  const onCopy = useCallback(() => {
-    if (hasCopied) {
-      return;
-    }
-    Clipboard.setString(address);
-    setHasCopied(true);
-    setTimeout(() => {
-      setHasCopied(false);
-    }, 2000);
-  }, [hasCopied, address]);
 
   return (
     <Modal
@@ -41,14 +28,13 @@ export default function WalletReceiveModal(props: WalletReceiveModalPropsType) {
             </TouchableOpacity>
           </View>
           <View style={styles.qrContainer}>
-            <QRCode value={address} size={260} />
+            <QRCode value={address} size={260} backgroundColor={'white'} />
           </View>
           <View style={styles.textContainer}>
             <Text>Scan this QR code</Text>
             <Text>(OR)</Text>
           </View>
           <Text style={styles.address}>{address}</Text>
-          <Button onPress={onCopy}>{hasCopied ? 'Copied' : 'Copy'}</Button>
         </View>
       </View>
     </Modal>
@@ -62,9 +48,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container: {
-    width: '85%',
-    maxWidth: 320,
+    width: '90%',
     height: '75%',
+    maxWidth: 400,
     maxHeight: 600,
     backgroundColor: color.inputBackgroundColor,
     borderRadius: 8,
@@ -74,14 +60,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   qrContainer: {
-    width: 260,
-    height: 260,
+    width: 280,
+    height: 280,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
     borderRadius: 8,
-    overflow: 'hidden',
   },
   textContainer: {
     alignItems: 'center',
-    marginVertical: 8,
+    marginVertical: 16,
   },
   address: {
     maxWidth: '70%',

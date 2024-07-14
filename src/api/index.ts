@@ -8,3 +8,4 @@ export * from './account/signIn';
 export * from './account/refreshToken';
 export * from './wallet/getWalletDetail';
 export * from './account/updateProfile';
+export * from './wallet/transferCoin';

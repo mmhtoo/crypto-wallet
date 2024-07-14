@@ -35,6 +35,9 @@ export function useSignIn() {
             type: 'danger',
           });
         }
+        toast.show('Unknown Error!', {
+          type: 'danger',
+        });
       }
     },
   });

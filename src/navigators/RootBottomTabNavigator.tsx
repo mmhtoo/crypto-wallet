@@ -64,6 +64,7 @@ const TAB_BAR_SCREENS: Array<TBottomTabItem> = [
 const CustomTabBar: FC<BottomTabBarProps> = ({state, navigation}) => {
   const containerStyle = StyleSheet.compose(styles.tabBarContainer, {
     backgroundColor: darkTheme.colors?.background,
+    paddingBottom: 24,
   });
   const activeIndex = state.index;
   const labelStyle = (isActive: boolean): TextStyle => ({
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 32,
     flexDirection: 'row',
-    columnGap: 32,
+    columnGap: 40,
     justifyContent: 'space-between',
   },
   tabBarItemContainer: {

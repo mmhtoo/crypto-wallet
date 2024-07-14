@@ -47,6 +47,7 @@ export default function SignUpScreen({
               <ControlledInput
                 fieldName="password"
                 label={'Password'}
+                secureTextEntry
                 placeholder={'Password'}
               />
             </View>

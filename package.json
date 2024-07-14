@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
-    "@react-native-community/clipboard": "^1.5.1",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
@@ -23,6 +22,7 @@
     "react": "18.2.0",
     "react-hook-form": "^7.52.0",
     "react-native": "0.74.2",
+    "react-native-camera-kit": "^13.0.0",
     "react-native-date-picker": "^5.0.4",
     "react-native-encrypted-storage": "^4.0.3",
     "react-native-paper": "^5.12.3",
