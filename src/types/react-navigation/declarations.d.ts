@@ -30,6 +30,12 @@ export type RootStackScreenList = {
   RootTab: NavigatorScreenParams<RootBottomTabScreenList>;
   TransactionHistoryDetail: {
     transactionHash: string;
+    transactionType: string;
+    recipient: string;
+    amount: number;
+    fee: number | null;
+    timestamp: Date | string;
+    status: string;
   };
 };
 

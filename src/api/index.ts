@@ -9,3 +9,5 @@ export * from './account/refreshToken';
 export * from './wallet/getWalletDetail';
 export * from './account/updateProfile';
 export * from './wallet/transferCoin';
+export * from './transaction-history/getTransactionHistories';
+export * from './transaction-history/getTransactionHistoryDetail';

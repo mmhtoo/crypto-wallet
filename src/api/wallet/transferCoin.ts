@@ -14,6 +14,7 @@ export type TransactionData = {
   timestamp: string | Date;
   block_number: number;
   fee: number | null;
+  recipient: string;
 };
 
 export default async function transferCoin(param: TransferCoinParamType) {
