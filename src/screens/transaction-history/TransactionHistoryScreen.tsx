@@ -4,6 +4,7 @@ import {Dimensions, FlatList, StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import {fontFamily} from 'styles';
 import TransactionHistory from './components/TransactionHistory';
+import useGetTransactionHistories from './hooks/useGetTransactionHistories';
 
 const EmptyTransaction = () => {
   const height = Dimensions.get('window').height;
@@ -18,6 +19,9 @@ const EmptyTransaction = () => {
 };
 
 export default function TransactionHistoryScreen() {
+  const {data, refetch, isRefetching} = useGetTransactionHistories();
+  const transactions = data || [];
+
   return (
     <SafeAreaLayout style={styles.root}>
       <View style={styles.container}>
@@ -26,24 +30,21 @@ export default function TransactionHistoryScreen() {
         </View>
         <View style={styles.listWrapper}>
           <FlatList
-            data={[1, 2, 3, 4, 5]}
-            keyExtractor={item => item.toString()}
-            renderItem={() => (
-              <>
-                <TransactionHistory
-                  amount={1000}
-                  issuedDate={new Date()}
-                  transactionType={'cash-in'}
-                  id="1"
-                />
-                <TransactionHistory
-                  amount={100}
-                  issuedDate={new Date()}
-                  transactionType={'cash-out'}
-                  id="2"
-                />
-              </>
+            data={transactions}
+            keyExtractor={item => item.transaction_hash}
+            renderItem={({item}) => (
+              <TransactionHistory
+                amount={item.amount}
+                issuedDate={item.timestamp}
+                transactionType={'cash-out'}
+                fee={item.fee}
+                id={item.transaction_hash}
+                recipient={item.recipient}
+                status={item.status}
+              />
             )}
+            onRefresh={refetch}
+            refreshing={isRefetching}
             ListEmptyComponent={<EmptyTransaction />}
           />
         </View>

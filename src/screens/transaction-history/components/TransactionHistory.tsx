@@ -9,13 +9,17 @@ import {RootBottomTabScreenProps} from 'types/react-navigation/declarations';
 
 type TTransactionHistoryProps = {
   transactionType: 'cash-in' | 'cash-out';
-  issuedDate: Date;
+  issuedDate: Date | string;
   amount: number;
   id: string;
+  status: string;
+  fee: number | null;
+  recipient: string;
 };
 
 export default function TransactionHistory(props: TTransactionHistoryProps) {
-  const {transactionType, issuedDate, amount} = props;
+  const {transactionType, issuedDate, amount, fee, id, recipient, status} =
+    props;
   const label = transactionType === 'cash-in' ? 'Cash In' : 'Cash Out';
   const isPlus = transactionType === 'cash-in';
   const amountStyle: TextStyle = {
@@ -31,14 +35,21 @@ export default function TransactionHistory(props: TTransactionHistoryProps) {
     <TouchableOpacity
       onPress={() =>
         navigation.navigate('TransactionHistoryDetail', {
-          transactionHash: '',
+          transactionHash: id,
+          amount,
+          fee,
+          recipient,
+          status,
+          timestamp: issuedDate,
+          transactionType: 'Cash Out',
         })
       }>
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.historyType}>{label}</Text>
           <Text style={StyleSheet.compose(styles.amount, amountStyle)}>
-            {isPlus ? '+' : '-'} ${amount.toLocaleString()}
+            {isPlus ? '+' : '-'}
+            {amount.toLocaleString()}
           </Text>
         </View>
         <View style={styles.footer}>

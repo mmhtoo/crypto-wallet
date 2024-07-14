@@ -1,14 +1,43 @@
 import {ProfileIcon} from 'assets/icons';
 import {SafeAreaLayout} from 'components';
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import dayjs from 'dayjs';
+import {useAppDispatch, useAppSelector, useLogout} from 'hooks';
+import React, {useCallback, useState} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {Button, Divider, Text} from 'react-native-paper';
+import {addUserInfo, selectUserInfo} from 'redux/slices/user-slice/userSlice';
 import {fontFamily} from 'styles';
+import ProfileUpdateModal from './components/ProfileUpdateModal';
+import {OnAfterUpdateCallback} from './hooks/useUpdateProfile';
 
 export default function ProfileScreen() {
+  const userInfo = useAppSelector(selectUserInfo);
+  const logout = useLogout();
+  // profile update modal state
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const afterUpdateCallback: OnAfterUpdateCallback = useCallback(
+    data => {
+      if (!userInfo) {
+        return;
+      }
+      dispatch(
+        addUserInfo({
+          userInfo: {
+            ...userInfo,
+            username: data.username,
+            date_of_birth: data.dob,
+          },
+        }),
+      );
+    },
+    [dispatch, userInfo],
+  );
+
   return (
     <SafeAreaLayout>
-      <View style={styles.root}>
+      <ScrollView contentContainerStyle={styles.root}>
         <ProfileIcon
           width={64}
           height={64}
@@ -16,28 +45,69 @@ export default function ProfileScreen() {
           style={styles.profileIcon}
         />
         <View style={styles.editBtnContainer}>
-          <Button>Edit</Button>
+          <Button onPress={() => setShowUpdateModal(true)}>Edit</Button>
         </View>
+        {/* update profile modal */}
+        <ProfileUpdateModal
+          show={showUpdateModal}
+          closeModal={() => setShowUpdateModal(false)}
+          initialData={{
+            username: userInfo?.username || '-',
+            email: userInfo?.email || '-',
+            dob: userInfo?.date_of_birth || '-',
+          }}
+          onAfterUpdate={afterUpdateCallback}
+        />
         <View style={styles.infoContainer}>
           <View style={styles.infoWrapper}>
             <Text style={styles.infoLabel}>Username</Text>
-            <Text style={styles.infoValue}>Lionel</Text>
+            <Text style={styles.infoValue}>
+              {userInfo ? userInfo.username : '...'}
+            </Text>
           </View>
           <Divider />
           <View style={styles.infoWrapper}>
             <Text style={styles.infoLabel}>Email</Text>
-            <Text style={styles.infoValue}>lionel@gmail.com</Text>
+            <Text style={styles.infoValue}>
+              {userInfo ? userInfo.email : '...'}
+            </Text>
           </View>
           <Divider />
           <View style={styles.infoWrapper}>
             <Text style={styles.infoLabel}>Date of Birth</Text>
-            <Text style={styles.infoValue}>01-01-2000</Text>
+            <Text style={styles.infoValue}>
+              {userInfo
+                ? userInfo.date_of_birth
+                  ? dayjs(userInfo.date_of_birth).format('YY-MM-YYYY')
+                  : '-'
+                : '...'}
+            </Text>
+          </View>
+          <Divider />
+          <View style={styles.infoWrapper}>
+            <Text style={styles.infoLabel}>Last login date</Text>
+            <Text style={styles.infoValue}>
+              {userInfo
+                ? userInfo.last_login
+                  ? dayjs(userInfo.last_login).format('YY-MM-YYYY')
+                  : '-'
+                : '...'}
+            </Text>
+          </View>
+          <Divider />
+          <View style={styles.infoWrapper}>
+            <Text style={styles.infoLabel}>Last login IP</Text>
+            <Text style={styles.infoValue}>
+              {userInfo ? userInfo.last_login_ip : '...'}
+            </Text>
           </View>
           <Divider />
 
-          <Button style={styles.logoutBtn}>Logout</Button>
+          <Button onPress={logout} style={styles.logoutBtn}>
+            Logout
+          </Button>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaLayout>
   );
 }
@@ -45,7 +115,8 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    paddingTop: 80,
+    paddingTop: 20,
+    justifyContent: 'center',
   },
   profileIcon: {
     padding: 8,

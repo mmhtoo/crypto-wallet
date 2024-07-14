@@ -1,6 +1,6 @@
-import {AuthLayout, Button, ControlledInput} from 'components';
+import {AuthLayout, ControlledInput} from 'components';
 import React from 'react';
-import {FormProvider, SubmitHandler, useForm} from 'react-hook-form';
+import {FormProvider} from 'react-hook-form';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -10,28 +10,13 @@ import {
 } from 'react-native';
 import {color, fontFamily, SIZE} from 'styles';
 import {PublicStackScreenProps} from 'types/react-navigation/declarations';
-import {Button as PaperButton} from 'react-native-paper';
-
-type FormValues = {
-  name: string;
-  email: string;
-};
+import {useSignUp} from './hooks/useSignUp';
+import {Button} from 'react-native-paper';
 
 export default function SignUpScreen({
   navigation,
 }: PublicStackScreenProps<'SignUp'>) {
-  const form = useForm<FormValues>({
-    defaultValues: {
-      name: '',
-      email: '',
-    },
-  });
-
-  const onSubmit: SubmitHandler<FormValues> = data => {
-    navigation.navigate('VerifyEmail', {
-      email: form.getValues('email'),
-    });
-  };
+  const {form, submit, isPending} = useSignUp();
 
   return (
     <AuthLayout onPress={() => navigation.canGoBack() && navigation.goBack()}>
@@ -50,7 +35,7 @@ export default function SignUpScreen({
             </Text>
             <View style={{marginTop: 20}}>
               <ControlledInput
-                fieldName="name"
+                fieldName="username"
                 label={'Name'}
                 placeholder="Name"
               />
@@ -59,13 +44,18 @@ export default function SignUpScreen({
                 label={'Email'}
                 placeholder={'example@gmail.com'}
               />
+              <ControlledInput
+                fieldName="password"
+                label={'Password'}
+                secureTextEntry
+                placeholder={'Password'}
+              />
             </View>
           </View>
           <View style={{paddingBottom: 40}}>
-            <Button title="Next" onPress={form.handleSubmit(onSubmit)} />
-            <PaperButton onPress={() => navigation.navigate('SignIn')}>
-              Already had an account?
-            </PaperButton>
+            <Button onPress={submit} disabled={isPending} mode="contained">
+              {isPending ? 'Loading...' : 'Continue'}
+            </Button>
             <View style={{marginTop: 10}}>
               <Text style={styles.byTappingText}>
                 By tapping “Get Started” you agree and consent to our

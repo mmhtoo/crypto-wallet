@@ -2,6 +2,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import React, {ReactNode} from 'react';
 import {CrossIcon} from 'assets/icons';
 import {color} from 'styles';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 type LayoutProps = {
   children: ReactNode;
@@ -11,7 +12,7 @@ type LayoutProps = {
 const AuthLayout = ({children, onPress}: LayoutProps) => {
   return (
     <>
-      <View style={styles.mainContainer}>
+      <SafeAreaView style={styles.mainContainer}>
         <TouchableOpacity
           style={styles.crossIconContainer}
           activeOpacity={0.7}
@@ -19,7 +20,7 @@ const AuthLayout = ({children, onPress}: LayoutProps) => {
           <CrossIcon />
         </TouchableOpacity>
         <View style={{flex: 1}}>{children}</View>
-      </View>
+      </SafeAreaView>
     </>
   );
 };

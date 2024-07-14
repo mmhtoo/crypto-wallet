@@ -4,3 +4,7 @@
  * \hooks
  *  index.ts
  */
+export * from './useGetProfile';
+export * from './useReduxHooks';
+export * from './useLogout';
+export * from './useCreateWallet';

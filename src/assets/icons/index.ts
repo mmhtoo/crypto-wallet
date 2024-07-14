@@ -7,3 +7,7 @@ export {default as HistoryIcon} from './history.svg';
 export {default as ProfileIcon} from './profile.svg';
 export {default as CashInIcon} from './cash-in.svg';
 export {default as CashOutIcon} from './cash-out.svg';
+export {default as ReceiveIcon} from './receive.svg';
+export {default as ReloadIcon} from './reload.svg';
+export {default as SendIcon} from './send.svg';
+export {default as CloseIcon} from './close.svg';
