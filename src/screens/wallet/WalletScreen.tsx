@@ -1,6 +1,6 @@
 import {SafeAreaLayout} from 'components';
 import {useAppSelector, useCreateWallet} from 'hooks';
-import React, {memo, useCallback} from 'react';
+import React, {useCallback} from 'react';
 import {Button, Text} from 'react-native-paper';
 import {selectUserInfo} from 'redux/slices/user-slice/userSlice';
 import useGetWalletDetail from './hooks/useGetWalletDetail';
@@ -12,7 +12,7 @@ import {CACHE_KEYS} from '../../constants';
 import WalletDetail from './components/WalletDetail';
 import {WalletDetailData} from 'api';
 
-const NotFoundWallet = memo(() => {
+const NotFoundWallet = () => {
   const {isPending, mutateAsync} = useCreateWallet();
   const userInfo = useAppSelector(selectUserInfo);
   const queryClient = useQueryClient();
@@ -42,7 +42,7 @@ const NotFoundWallet = memo(() => {
       </Button>
     </View>
   );
-});
+};
 
 export default function WalletScreen() {
   const {walletDetailRes, isPending, refetch, isRefetching} =

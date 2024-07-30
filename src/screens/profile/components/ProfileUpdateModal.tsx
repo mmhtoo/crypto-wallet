@@ -79,7 +79,7 @@ export default function ProfileUpdateModal(props: IProfileUpdateModalProps) {
                       setDob(
                         initialData.dob === '-'
                           ? new Date()
-                          : (initialData.dob as Date),
+                          : new Date(initialData.dob),
                       );
                     }}
                     onConfirm={date => {
